@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NN Accelerator+ | 20-Year &amp; 40-Year Retirement Growth Curves (€50 vs. €65 vs. €80)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <!-- Chart.js DataLabels Plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F8FAFC;
+      color: #0F172A;
+    }
+
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background-color: #FFFFFF !important;
+      }
+      .print-flat {
+        box-shadow: none !important;
+        border: 1px solid #E2E8F0 !important;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <!-- Single Minimalist Editorial Card -->
+    <main class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-5 sm:p-8 space-y-8 print-flat">
+
+      <!-- Card Header -->
+      <header class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 pb-5 border-b border-slate-100">
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold tracking-wide uppercase">
+            <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+            NN Hellas &bull; NN Accelerator+
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Medium-Term &amp; Retirement Capital Growth
+          </h1>
+          <p class="text-sm text-slate-500">
+            6.00% Indicative Annual Return Scenario &bull; Exact Euro (€) Values (20-Year vs. 40-Year Retirement Horizon)
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onclick="window.print()"
+          class="no-print self-start inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.99] text-white text-sm font-medium transition shadow-sm cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          Print / Save PDF
+        </button>
+      </header>
+
+      <!-- Interactive Legend & Invested Reference Selector -->
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <!-- Quick View Mode Switcher -->
+        <div class="flex flex-wrap items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-2xl" id="viewModeControls">
+          <button
+            type="button"
+            data-mode="all"
+            class="view-btn active px-3 py-1.5 rounded-xl bg-white text-slate-900 shadow-xs text-xs sm:text-sm font-bold transition cursor-pointer"
+          >
+            All Curves
+          </button>
+          <button
+            type="button"
+            data-mode="valuesOnly"
+            class="view-btn px-3 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 text-xs sm:text-sm font-semibold transition cursor-pointer"
+          >
+            Account Values (All 3)
+          </button>
+          <button
+            type="button"
+            data-mode="80"
+            class="view-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-600 hover:text-emerald-800 text-xs sm:text-sm font-semibold transition cursor-pointer"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+            <span>€80/mo Only</span>
+          </button>
+          <button
+            type="button"
+            data-mode="65"
+            class="view-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-600 hover:text-purple-800 text-xs sm:text-sm font-semibold transition cursor-pointer"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-700"></span>
+            <span>€65/mo Only</span>
+          </button>
+          <button
+            type="button"
+            data-mode="50"
+            class="view-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-600 hover:text-sky-800 text-xs sm:text-sm font-semibold transition cursor-pointer"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+            <span>€50/mo Only</span>
+          </button>
+        </div>
+
+        <!-- Line Style Key (Solid = Account Value, Dashed = Invested Capital) -->
+        <div class="inline-flex items-center gap-4 bg-slate-100/90 px-3.5 py-2 rounded-xl self-start lg:self-auto text-xs font-semibold text-slate-600">
+          <div class="inline-flex items-center gap-2">
+            <span class="w-5 h-0.5 bg-slate-700 rounded-full"></span>
+            <span>Account Value</span>
+          </div>
+          <div class="inline-flex items-center gap-2" id="dashedLegendItem">
+            <span class="w-5 border-t-2 border-dashed border-slate-500"></span>
+            <span>Invested Capital</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHART 1: 20-YEAR MEDIUM-TERM HORIZON -->
+      <section class="space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">
+            1. Medium-Term Horizon (Years 1–20 &bull; Ages 26–45)
+          </h2>
+          <span class="text-xs font-medium text-slate-500">
+            Key Milestones: Year 11 (Penalty-Free), Year 15 &amp; Year 20
+          </span>
+        </div>
+        <div class="relative w-full h-[420px] sm:h-[490px]">
+          <canvas id="growthCurveChart20"></canvas>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <hr class="border-slate-100" />
+
+      <!-- CHART 2: 40-YEAR RETIREMENT HORIZON -->
+      <section class="space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">
+            2. Retirement Horizon (Up to Year 40 &bull; Age 65)
+          </h2>
+          <span class="text-xs font-medium text-slate-500">
+            Key Milestones: Year 11, Year 20, Year 30 &amp; Year 40 (Retirement)
+          </span>
+        </div>
+        <div class="relative w-full h-[420px] sm:h-[490px]">
+          <canvas id="growthCurveChart40"></canvas>
+        </div>
+      </section>
+
+      <!-- Minimal Footnote -->
+      <footer class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-400">
+        <span>Source: NN Hellas Proposal Page 5 (6.00% indicative yield scenario, including 2% annual indexation &amp; policy charges).</span>
+        <span>Hover or tap any point on either curve to inspect exact Euro (€) amounts.</span>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    Chart.register(ChartDataLabels);
+
+    // =========================================================================
+    // 1. EXACT PAGE 5 PROPOSAL DATA (YEARS 1–20 & EXTENDED TO YEAR 40)
+    // =========================================================================
+    const YEARS_20 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    const MILESTONES_20 = new Set([10, 14, 19]); // Indices for Year 11, Year 15, Year 20
+
+    const YEARS_40 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30, 35, 40];
+    const MILESTONES_40 = new Set([10, 19, 21, 23]); // Indices for Year 11, Year 20, Year 30, Year 40
+
+    const DATA_20 = {
+      '50': {
+        invested: [
+          600.00, 1212.00, 1836.24, 2472.96, 3122.42,
+          3784.87, 4460.57, 5149.78, 5852.78, 6569.83,
+          7301.23, 8047.25, 8808.20, 9584.36, 10376.05,
+          11183.57, 12007.24, 12847.39, 13704.34, 14578.42
+        ],
+        value: [
+          535.58, 1101.55, 1699.18, 2329.79, 2994.76,
+          3695.48, 4433.54, 5210.32, 6027.52, 6886.73,
+          7864.73, 8901.03, 9998.46, 11160.09, 12389.02,
+          13688.58, 15062.28, 16513.65, 18046.49, 19664.78
+        ]
+      },
+      '65': {
+        invested: [
+          780.00, 1575.60, 2387.11, 3214.85, 4059.15,
+          4920.33, 5798.74, 6694.72, 7608.61, 8540.78,
+          9491.60, 10461.43, 11450.66, 12459.67, 13488.86,
+          14538.64, 15609.41, 16701.60, 17815.63, 18951.95
+        ],
+        value: [
+          718.87, 1478.01, 2279.16, 3123.99, 4014.34,
+          4952.13, 5939.21, 6977.62, 8069.58, 9217.17,
+          10522.96, 11906.12, 13370.43, 14919.73, 16558.42,
+          18290.67, 20121.14, 22054.67, 24096.18, 26250.83
+        ]
+      },
+      '80': {
+        invested: [
+          960.00, 1939.20, 2937.98, 3956.74, 4995.88,
+          6055.80, 7136.91, 8239.65, 9364.44, 10511.73,
+          11681.97, 12875.61, 14093.12, 15334.98, 16601.68,
+          17893.72, 19211.59, 20555.82, 21926.94, 23325.48
+        ],
+        value: [
+          902.16, 1854.48, 2859.02, 3918.06, 5033.67,
+          6208.39, 7444.48, 8744.50, 10111.10, 11547.05,
+          13180.73, 14910.72, 16741.76, 18678.84, 20727.13,
+          22892.05, 25179.26, 27594.79, 30144.81, 32835.77
+        ]
+      }
+    };
+
+    // Extended data up to Year 40 (Years 1–20 + Years 25, 30, 35, 40 from Page 5)
+    const DATA_40 = {
+      '50': {
+        invested: [...DATA_20['50'].invested, 19218.18, 24340.85, 29996.69, 36241.19],
+        value:    [...DATA_20['50'].value,    29189.17, 41556.96, 57512.32, 77984.80]
+      },
+      '65': {
+        invested: [...DATA_20['65'].invested, 24983.63, 31643.10, 38995.69, 47113.54],
+        value:    [...DATA_20['65'].value,    38923.11, 55362.08, 76552.04, 103722.73]
+      },
+      '80': {
+        invested: [...DATA_20['80'].invested, 30749.09, 38945.36, 47994.70, 57985.91],
+        value:    [...DATA_20['80'].value,    48655.40, 69164.90, 95588.76, 129456.82]
+      }
+    };
+
+    // State variables for interactive view modes
+    let chartInstance20 = null;
+    let chartInstance40 = null;
+    let currentViewMode = 'all'; // 'all' | 'valuesOnly' | '80' | '65' | '50'
+
+    // Helper to determine visibility of each series based on selected mode
+    function isSeriesVisible(tier, type) {
+      if (currentViewMode === 'all') return true;
+      if (currentViewMode === 'valuesOnly') return type === 'value';
+      return currentViewMode === tier;
+    }
+
+    // Currency formatting helpers (strictly Euros, no percentages)
+    const fmtLabelEUR = (val) => '€' + Math.round(val).toLocaleString('en-US');
+    const fmtExactEUR = (val) =>
+      '€' +
+      val.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+    // Custom Plugin: Vertical Hover Guide Line & Year 11 Penalty-Free Marker
+    const verticalGuidePlugin = {
+      id: 'verticalGuide',
+      beforeDatasetsDraw(chart) {
+        const ctx = chart.ctx;
+        const xScale = chart.scales.x;
+        const yScale = chart.scales.y;
+        const yr11X = xScale.getPixelForValue(10); // Index 10 = Year 11
+
+        ctx.save();
+        // Subtle vertical highlight at Year 11 (No Surrender Penalty milestone)
+        ctx.beginPath();
+        ctx.moveTo(yr11X, yScale.top);
+        ctx.lineTo(yr11X, yScale.bottom);
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(16, 185, 129, 0.35)';
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+
+        // Badge label above Year 11 line
+        ctx.setLineDash([]);
+        ctx.font = '700 10.5px Inter, sans-serif';
+        ctx.fillStyle = '#059669';
+        ctx.textAlign = 'center';
+        ctx.fillText('Yr 11: Penalty-Free', yr11X, yScale.top - 10);
+
+        // Active hover crosshair
+        if (chart.tooltip && chart.tooltip._active && chart.tooltip._active.length) {
+          const activeX = chart.tooltip._active[0].element.x;
+          ctx.beginPath();
+          ctx.moveTo(activeX, yScale.top);
+          ctx.lineTo(activeX, yScale.bottom);
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = '#94A3B8';
+          ctx.setLineDash([4, 4]);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+    };
+
+    // =========================================================================
+    // 2. RENDER SMOOTH MULTI-LINE CURVE CHART
+    // =========================================================================
+    function renderChart() {
+      const ctx = document.getElementById('growthCurveChart').getContext('2d');
+      const labels = YEARS.map((yr) => (MILESTONE_INDICES.has(yr - 1) ? `Yr ${yr}` : `${yr}`));
+      const pointRadii = YEARS.map((_, idx) => (MILESTONE_INDICES.has(idx) ? 5 : 0));
+      const pointHoverRadii = YEARS.map(() => 6);
+
+      const datasets = [
+        // 1A: €80/mo Account Value (Solid Green)
+        {
+          id: 'val80',
+          label: '€80/mo Value',
+          data: DATA['80'].value,
+          hidden: !isSeriesVisible('80', 'value'),
+          borderColor: '#059669',
+          backgroundColor: '#059669',
+          borderWidth: 3.25,
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#059669',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          datalabels: {
+            display: (c) => MILESTONE_INDICES.has(c.dataIndex),
+            align: (c) => (c.dataIndex === 19 ? 'left' : 'top'),
+            anchor: (c) => (c.dataIndex === 19 ? 'start' : 'end'),
+            offset: (c) => (c.dataIndex === 19 ? 8 : 6),
+            clamp: true,
+            color: '#065F46',
+            backgroundColor: 'rgba(236, 253, 245, 0.94)',
+            borderColor: '#A7F3D0',
+            borderWidth: 1,
+            borderRadius: 6,
+            padding: { top: 2, bottom: 2, left: 6, right: 6 },
+            font: { family: 'Inter', size: 11, weight: '700' },
+            formatter: (val, c) => (c.dataIndex === 19 ? `€80/mo: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        },
+        // 1B: €80/mo Invested Capital (Dashed Green)
+        {
+          id: 'inv80',
+          label: '€80/mo Invested',
+          data: DATA['80'].invested,
+          hidden: !isSeriesVisible('80', 'invested'),
+          borderColor: '#10B981',
+          backgroundColor: '#10B981',
+          borderWidth: 2.25,
+          borderDash: [6, 5],
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#10B981',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 1.5,
+          datalabels: {
+            display: (c) => (currentViewMode === '80' ? MILESTONE_INDICES.has(c.dataIndex) : c.dataIndex === 19),
+            align: (c) => (c.dataIndex === 19 ? 'left' : 'bottom'),
+            anchor: 'start',
+            offset: (c) => (c.dataIndex === 19 ? 8 : 6),
+            clamp: true,
+            color: '#065F46',
+            backgroundColor: 'rgba(236, 253, 245, 0.9)',
+            borderColor: '#A7F3D0',
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: { top: 1, bottom: 1, left: 5, right: 5 },
+            font: { family: 'Inter', size: 10, weight: '600' },
+            formatter: (val) => `Inv: ${fmtLabelEUR(val)}`
+          }
+        },
+        // 2A: €65/mo Account Value (Solid Purple)
+        {
+          id: 'val65',
+          label: '€65/mo Value',
+          data: DATA['65'].value,
+          hidden: !isSeriesVisible('65', 'value'),
+          borderColor: '#6D28D9',
+          backgroundColor: '#6D28D9',
+          borderWidth: 3.5,
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#6D28D9',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          datalabels: {
+            display: (c) => MILESTONE_INDICES.has(c.dataIndex),
+            align: (c) => (c.dataIndex === 19 ? 'left' : 'top'),
+            anchor: (c) => (c.dataIndex === 19 ? 'start' : 'end'),
+            offset: (c) => (c.dataIndex === 19 ? 8 : 6),
+            clamp: true,
+            color: '#4C1D95',
+            backgroundColor: 'rgba(245, 243, 255, 0.95)',
+            borderColor: '#DDD6FE',
+            borderWidth: 1,
+            borderRadius: 6,
+            padding: { top: 2, bottom: 2, left: 6, right: 6 },
+            font: { family: 'Inter', size: 11.5, weight: '800' },
+            formatter: (val, c) => (c.dataIndex === 19 ? `€65/mo: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        },
+        // 2B: €65/mo Invested Capital (Dashed Purple)
+        {
+          id: 'inv65',
+          label: '€65/mo Invested',
+          data: DATA['65'].invested,
+          hidden: !isSeriesVisible('65', 'invested'),
+          borderColor: '#8B5CF6',
+          backgroundColor: '#8B5CF6',
+          borderWidth: 2.25,
+          borderDash: [6, 5],
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#8B5CF6',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 1.5,
+          datalabels: {
+            display: (c) => (currentViewMode === '65' ? MILESTONE_INDICES.has(c.dataIndex) : c.dataIndex === 19),
+            align: (c) => (c.dataIndex === 19 ? 'left' : 'bottom'),
+            anchor: 'start',
+            offset: (c) => (c.dataIndex === 19 ? 8 : 6),
+            clamp: true,
+            color: '#4C1D95',
+            backgroundColor: 'rgba(245, 243, 255, 0.9)',
+            borderColor: '#DDD6FE',
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: { top: 1, bottom: 1, left: 5, right: 5 },
+            font: { family: 'Inter', size: 10, weight: '600' },
+            formatter: (val) => `Inv: ${fmtLabelEUR(val)}`
+          }
+        },
+        // 3A: €50/mo Account Value (Solid Blue)
+        {
+          id: 'val50',
+          label: '€50/mo Value',
+          data: DATA['50'].value,
+          hidden: !isSeriesVisible('50', 'value'),
+          borderColor: '#0284C7',
+          backgroundColor: '#0284C7',
+          borderWidth: 3,
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#0284C7',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          datalabels: {
+            display: (c) => MILESTONE_INDICES.has(c.dataIndex),
+            align: (c) => (c.dataIndex === 19 ? 'left' : 'top'),
+            anchor: (c) => (c.dataIndex === 19 ? 'start' : 'end'),
+            offset: (c) => (c.dataIndex === 19 ? 8 : 6),
+            clamp: true,
+            color: '#0C4A6E',
+            backgroundColor: 'rgba(240, 249, 255, 0.94)',
+            borderColor: '#BAE6FD',
+            borderWidth: 1,
+            borderRadius: 6,
+            padding: { top: 2, bottom: 2, left: 6, right: 6 },
+            font: { family: 'Inter', size: 11, weight: '700' },
+            formatter: (val, c) => (c.dataIndex === 19 ? `€50/mo: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        },
+        // 3B: €50/mo Invested Capital (Dashed Blue)
+        {
+          id: 'inv50',
+          label: '€50/mo Invested',
+          data: DATA['50'].invested,
+          hidden: !isSeriesVisible('50', 'invested'),
+          borderColor: '#38BDF8',
+          backgroundColor: '#38BDF8',
+          borderWidth: 2.25,
+          borderDash: [6, 5],
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#38BDF8',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 1.5,
+          datalabels: {
+            display: (c) => MILESTONE_INDICES.has(c.dataIndex),
+            align: (c) => (c.dataIndex === 19 ? 'left' : 'bottom'),
+            anchor: 'start',
+            offset: (c) => (c.dataIndex === 19 ? 8 : 7),
+            clamp: true,
+            color: '#0C4A6E',
+            backgroundColor: 'rgba(240, 249, 255, 0.92)',
+            borderColor: '#BAE6FD',
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: { top: 1, bottom: 1, left: 5, right: 5 },
+            font: { family: 'Inter', size: 10, weight: '600' },
+            formatter: (val, c) => (c.dataIndex === 19 ? `Inv: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        }
+      ];
+
+      if (chartInstance) {
+        chartInstance.data.datasets = datasets;
+        chartInstance.update();
+        return;
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        plugins: [verticalGuidePlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 32,
+              right: 26,
+              left: 6,
+              bottom: 14
+            }
+          },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false // Replaced by custom interactive legend pills above
+            },
+            tooltip: {
+              backgroundColor: '#0F172A',
+              titleColor: '#F8FAFC',
+              bodyColor: '#E2E8F0',
+              borderColor: '#334155',
+              borderWidth: 1,
+              padding: 14,
+              cornerRadius: 12,
+              titleFont: { family: 'Inter', size: 13.5, weight: '700' },
+              bodyFont: { family: 'Inter', size: 12.5 },
+              callbacks: {
+                title: (items) => {
+                  const yr = YEARS[items[0].dataIndex];
+                  const statusNote = yr >= 11 ? ' • Full Surrender Value (No Penalty)' : ' • Early Surrender Period';
+                  return `Year ${yr}${statusNote}`;
+                },
+                label: (ctx) => {
+                  return ` ${ctx.dataset.label}: ${fmtExactEUR(ctx.parsed.y)}`;
+                },
+                afterBody: (items) => {
+                  const idx = items[0].dataIndex;
+                  if (currentViewMode === '80' || currentViewMode === '65' || currentViewMode === '50') {
+                    const tier = currentViewMode;
+                    const netGain = DATA[tier].value[idx] - DATA[tier].invested[idx];
+                    const signGain = netGain >= 0 ? '+' : '-';
+                    return [
+                      '──────────────────────────────',
+                      ` €${tier}/mo Net Euro Gain: ${signGain}${fmtExactEUR(Math.abs(netGain))}`
+                    ];
+                  }
+                  const diff65vs50 = DATA['65'].value[idx] - DATA['50'].value[idx];
+                  const netGain65 = DATA['65'].value[idx] - DATA['65'].invested[idx];
+                  const signGain = netGain65 >= 0 ? '+' : '-';
+                  return [
+                    '──────────────────────────────',
+                    ` €65/mo vs €50/mo Advantage: +${fmtExactEUR(diff65vs50)}`,
+                    ` €65/mo Net Euro Gain: ${signGain}${fmtExactEUR(Math.abs(netGain65))}`
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: (ctx) => (MILESTONE_INDICES.has(ctx.index) ? '#E2E8F0' : 'transparent'),
+                lineWidth: 1
+              },
+              border: {
+                color: '#CBD5E1'
+              },
+              ticks: {
+                font: (ctx) => ({
+                  family: 'Inter',
+                  size: MILESTONE_INDICES.has(ctx.index) ? 12.5 : 11,
+                  weight: MILESTONE_INDICES.has(ctx.index) ? '800' : '500'
+                }),
+                color: (ctx) => (MILESTONE_INDICES.has(ctx.index) ? '#0F172A' : '#64748B'),
+                maxRotation: 0,
+                autoSkip: false
+              }
+            },
+            y: {
+              beginAtZero: true,
+              suggestedMax: 36000,
+              border: {
+                display: false
+              },
+              grid: {
+                color: '#F1F5F9'
+              },
+              ticks: {
+                font: {
+                  family: 'Inter',
+                  size: 11.5,
+                  weight: '600'
+                },
+                color: '#64748B',
+                callback: (val) => '€' + val.toLocaleString('en-US')
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // 3. INTERACTIVE CONTROLS (SERIES TOGGLES & INVESTED TIER SWITCHER)
+    // =========================================================================
+    // 3. INTERACTIVE CONTROLS (TIER TOGGLES)
+    // =========================================================================
+    // 3. INTERACTIVE VIEW MODE SWITCHER
+    // =========================================================================
+    // 2. SHARED CHART BUILDER (WORKS FOR BOTH 20-YEAR & 40-YEAR HORIZONS)
+    // =========================================================================
+    function buildOrUpdateChart({ canvasId, existingChart, yearsArray, milestoneSet, dataObj, suggestedMaxY }) {
+      const ctx = document.getElementById(canvasId).getContext('2d');
+      const lastIndex = yearsArray.length - 1;
+      const labels = yearsArray.map((yr, idx) => (milestoneSet.has(idx) ? `Yr ${yr}` : `${yr}`));
+      const pointRadii = yearsArray.map((_, idx) => (milestoneSet.has(idx) ? 5 : 0));
+      const pointHoverRadii = yearsArray.map(() => 6);
+
+      const datasets = [
+        // 1A: €80/mo Account Value (Solid Green)
+        {
+          id: 'val80',
+          label: '€80/mo Value',
+          data: dataObj['80'].value,
+          hidden: !isSeriesVisible('80', 'value'),
+          borderColor: '#059669',
+          backgroundColor: '#059669',
+          borderWidth: 3.25,
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#059669',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          datalabels: {
+            display: (c) => milestoneSet.has(c.dataIndex),
+            align: 'left',
+            anchor: 'center',
+            offset: 8,
+            clamp: true,
+            color: '#065F46',
+            backgroundColor: 'rgba(236, 253, 245, 0.94)',
+            borderColor: '#A7F3D0',
+            borderWidth: 1,
+            borderRadius: 6,
+            padding: { top: 2, bottom: 2, left: 6, right: 6 },
+            font: { family: 'Inter', size: 11, weight: '700' },
+            formatter: (val, c) => (c.dataIndex === lastIndex ? `€80/mo: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        },
+        // 1B: €80/mo Invested Capital (Dashed Green)
+        {
+          id: 'inv80',
+          label: '€80/mo Invested',
+          data: dataObj['80'].invested,
+          hidden: !isSeriesVisible('80', 'invested'),
+          borderColor: '#10B981',
+          backgroundColor: '#10B981',
+          borderWidth: 2.25,
+          borderDash: [6, 5],
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#10B981',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 1.5,
+          datalabels: {
+            display: (c) => (currentViewMode === '80' ? milestoneSet.has(c.dataIndex) : c.dataIndex === lastIndex),
+            align: 'left',
+            anchor: 'center',
+            offset: 8,
+            clamp: true,
+            color: '#065F46',
+            backgroundColor: 'rgba(236, 253, 245, 0.9)',
+            borderColor: '#A7F3D0',
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: { top: 1, bottom: 1, left: 5, right: 5 },
+            font: { family: 'Inter', size: 10, weight: '600' },
+            formatter: (val) => `Inv: ${fmtLabelEUR(val)}`
+          }
+        },
+        // 2A: €65/mo Account Value (Solid Purple)
+        {
+          id: 'val65',
+          label: '€65/mo Value',
+          data: dataObj['65'].value,
+          hidden: !isSeriesVisible('65', 'value'),
+          borderColor: '#6D28D9',
+          backgroundColor: '#6D28D9',
+          borderWidth: 3.5,
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#6D28D9',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          datalabels: {
+            display: (c) => milestoneSet.has(c.dataIndex),
+            align: 'left',
+            anchor: 'center',
+            offset: 8,
+            clamp: true,
+            color: '#4C1D95',
+            backgroundColor: 'rgba(245, 243, 255, 0.95)',
+            borderColor: '#DDD6FE',
+            borderWidth: 1,
+            borderRadius: 6,
+            padding: { top: 2, bottom: 2, left: 6, right: 6 },
+            font: { family: 'Inter', size: 11.5, weight: '800' },
+            formatter: (val, c) => (c.dataIndex === lastIndex ? `€65/mo: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        },
+        // 2B: €65/mo Invested Capital (Dashed Purple)
+        {
+          id: 'inv65',
+          label: '€65/mo Invested',
+          data: dataObj['65'].invested,
+          hidden: !isSeriesVisible('65', 'invested'),
+          borderColor: '#8B5CF6',
+          backgroundColor: '#8B5CF6',
+          borderWidth: 2.25,
+          borderDash: [6, 5],
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#8B5CF6',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 1.5,
+          datalabels: {
+            display: (c) => (currentViewMode === '65' ? milestoneSet.has(c.dataIndex) : c.dataIndex === lastIndex),
+            align: 'left',
+            anchor: 'center',
+            offset: 8,
+            clamp: true,
+            color: '#4C1D95',
+            backgroundColor: 'rgba(245, 243, 255, 0.9)',
+            borderColor: '#DDD6FE',
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: { top: 1, bottom: 1, left: 5, right: 5 },
+            font: { family: 'Inter', size: 10, weight: '600' },
+            formatter: (val) => `Inv: ${fmtLabelEUR(val)}`
+          }
+        },
+        // 3A: €50/mo Account Value (Solid Blue)
+        {
+          id: 'val50',
+          label: '€50/mo Value',
+          data: dataObj['50'].value,
+          hidden: !isSeriesVisible('50', 'value'),
+          borderColor: '#0284C7',
+          backgroundColor: '#0284C7',
+          borderWidth: 3,
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#0284C7',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          datalabels: {
+            display: (c) => milestoneSet.has(c.dataIndex),
+            align: 'left',
+            anchor: 'center',
+            offset: 8,
+            clamp: true,
+            color: '#0C4A6E',
+            backgroundColor: 'rgba(240, 249, 255, 0.94)',
+            borderColor: '#BAE6FD',
+            borderWidth: 1,
+            borderRadius: 6,
+            padding: { top: 2, bottom: 2, left: 6, right: 6 },
+            font: { family: 'Inter', size: 11, weight: '700' },
+            formatter: (val, c) => (c.dataIndex === lastIndex ? `€50/mo: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        },
+        // 3B: €50/mo Invested Capital (Dashed Blue)
+        {
+          id: 'inv50',
+          label: '€50/mo Invested',
+          data: dataObj['50'].invested,
+          hidden: !isSeriesVisible('50', 'invested'),
+          borderColor: '#38BDF8',
+          backgroundColor: '#38BDF8',
+          borderWidth: 2.25,
+          borderDash: [6, 5],
+          tension: 0.35,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointHoverRadii,
+          pointBackgroundColor: '#38BDF8',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 1.5,
+          datalabels: {
+            display: (c) => milestoneSet.has(c.dataIndex),
+            align: 'left',
+            anchor: 'center',
+            offset: 8,
+            clamp: true,
+            color: '#0C4A6E',
+            backgroundColor: 'rgba(240, 249, 255, 0.92)',
+            borderColor: '#BAE6FD',
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: { top: 1, bottom: 1, left: 5, right: 5 },
+            font: { family: 'Inter', size: 10, weight: '600' },
+            formatter: (val, c) => (c.dataIndex === lastIndex ? `Inv: ${fmtLabelEUR(val)}` : fmtLabelEUR(val))
+          }
+        }
+      ];
+
+      if (existingChart) {
+        existingChart.data.datasets = datasets;
+        existingChart.update();
+        return existingChart;
+      }
+
+      return new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        plugins: [verticalGuidePlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 32,
+              right: 26,
+              left: 6,
+              bottom: 14
+            }
+          },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false // Replaced by custom interactive legend pills above
+            },
+            tooltip: {
+              backgroundColor: '#0F172A',
+              titleColor: '#F8FAFC',
+              bodyColor: '#E2E8F0',
+              borderColor: '#334155',
+              borderWidth: 1,
+              padding: 14,
+              cornerRadius: 12,
+              titleFont: { family: 'Inter', size: 13.5, weight: '700' },
+              bodyFont: { family: 'Inter', size: 12.5 },
+              callbacks: {
+                title: (items) => {
+                  const yr = yearsArray[items[0].dataIndex];
+                  const age = 25 + yr;
+                  const statusNote = yr >= 11 ? ' • Full Surrender Value (No Penalty)' : ' • Early Surrender Period';
+                  return `Year ${yr} (Age ${age})${statusNote}`;
+                },
+                label: (ctx) => {
+                  return ` ${ctx.dataset.label}: ${fmtExactEUR(ctx.parsed.y)}`;
+                },
+                afterBody: (items) => {
+                  const idx = items[0].dataIndex;
+                  if (currentViewMode === '80' || currentViewMode === '65' || currentViewMode === '50') {
+                    const tier = currentViewMode;
+                    const netGain = dataObj[tier].value[idx] - dataObj[tier].invested[idx];
+                    const signGain = netGain >= 0 ? '+' : '-';
+                    return [
+                      '──────────────────────────────',
+                      ` €${tier}/mo Net Euro Gain: ${signGain}${fmtExactEUR(Math.abs(netGain))}`
+                    ];
+                  }
+                  const diff65vs50 = dataObj['65'].value[idx] - dataObj['50'].value[idx];
+                  const netGain65 = dataObj['65'].value[idx] - dataObj['65'].invested[idx];
+                  const signGain = netGain65 >= 0 ? '+' : '-';
+                  return [
+                    '──────────────────────────────',
+                    ` €65/mo vs €50/mo Advantage: +${fmtExactEUR(diff65vs50)}`,
+                    ` €65/mo Net Euro Gain: ${signGain}${fmtExactEUR(Math.abs(netGain65))}`
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: (ctx) => (milestoneSet.has(ctx.index) ? '#E2E8F0' : 'transparent'),
+                lineWidth: 1
+              },
+              border: {
+                color: '#CBD5E1'
+              },
+              ticks: {
+                font: (ctx) => ({
+                  family: 'Inter',
+                  size: milestoneSet.has(ctx.index) ? 12.5 : 11,
+                  weight: milestoneSet.has(ctx.index) ? '800' : '500'
+                }),
+                color: (ctx) => (milestoneSet.has(ctx.index) ? '#0F172A' : '#64748B'),
+                maxRotation: 0,
+                autoSkip: false
+              }
+            },
+            y: {
+              beginAtZero: true,
+              suggestedMax: suggestedMaxY,
+              border: {
+                display: false
+              },
+              grid: {
+                color: '#F1F5F9'
+              },
+              ticks: {
+                font: {
+                  family: 'Inter',
+                  size: 11.5,
+                  weight: '600'
+                },
+                color: '#64748B',
+                callback: (val) => '€' + val.toLocaleString('en-US')
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderAllCharts() {
+      chartInstance20 = buildOrUpdateChart({
+        canvasId: 'growthCurveChart20',
+        existingChart: chartInstance20,
+        yearsArray: YEARS_20,
+        milestoneSet: MILESTONES_20,
+        dataObj: DATA_20,
+        suggestedMaxY: 36000
+      });
+
+      chartInstance40 = buildOrUpdateChart({
+        canvasId: 'growthCurveChart40',
+        existingChart: chartInstance40,
+        yearsArray: YEARS_40,
+        milestoneSet: MILESTONES_40,
+        dataObj: DATA_40,
+        suggestedMaxY: 140000
+      });
+    }
+
+    // =========================================================================
+    // 3. INTERACTIVE VIEW MODE SWITCHER
+    // =========================================================================
+    const dashedLegendItem = document.getElementById('dashedLegendItem');
+
+    document.querySelectorAll('.view-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentViewMode = btn.dataset.mode;
+
+        // Update active button styling
+        document.querySelectorAll('.view-btn').forEach((b) => {
+          b.classList.remove('active', 'bg-white', 'text-slate-900', 'shadow-xs', 'font-bold');
+          b.classList.add('text-slate-600', 'font-semibold');
+        });
+        btn.classList.add('active', 'bg-white', 'text-slate-900', 'shadow-xs', 'font-bold');
+        btn.classList.remove('text-slate-600', 'font-semibold');
+
+        // Dim dashed legend item when viewing Account Values Only
+        if (currentViewMode === 'valuesOnly') {
+          dashedLegendItem.classList.add('opacity-35');
+        } else {
+          dashedLegendItem.classList.remove('opacity-35');
+        }
+
+        renderAllCharts();
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', renderAllCharts);
+  </script>
+</body>
+</html>
